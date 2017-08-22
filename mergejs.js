@@ -73,33 +73,55 @@ const hexToRgb = (hex) => {
     return r + "," + g + "," + b;
 };
 
-(function style() {
-       
+const insertAfter = (newNode, target) => {
+    target.parentNode.insertBefore(newNode, target.nextSibiling);
+};
+
+const main = () => {
+    const element = `<a href='/groups/mv.com/merge_requests'><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="m5 5.563v4.875c1.024.4 1.75 1.397 1.75 2.563 0 1.519-1.231 2.75-2.75 2.75-1.519 0-2.75-1.231-2.75-2.75 0-1.166.726-2.162 1.75-2.563v-4.875c-1.024-.4-1.75-1.397-1.75-2.563 0-1.519 1.231-2.75 2.75-2.75 1.519 0 2.75 1.231 2.75 2.75 0 1.166-.726 2.162-1.75 2.563m-1 8.687c.69 0 1.25-.56 1.25-1.25 0-.69-.56-1.25-1.25-1.25-.69 0-1.25.56-1.25 1.25 0 .69.56 1.25 1.25 1.25m0-10c.69 0 1.25-.56 1.25-1.25 0-.69-.56-1.25-1.25-1.25-.69 0-1.25.56-1.25 1.25 0 .69.56 1.25 1.25 1.25"></path><path d="m10.501 2c1.381.001 2.499 1.125 2.499 2.506v5.931c1.024.4 1.75 1.397 1.75 2.563 0 1.519-1.231 2.75-2.75 2.75-1.519 0-2.75-1.231-2.75-2.75 0-1.166.726-2.162 1.75-2.563v-5.931c0-.279-.225-.506-.499-.506v.926c0 .346-.244.474-.569.271l-2.952-1.844c-.314-.196-.325-.507 0-.71l2.952-1.844c.314-.196.569-.081.569.271v.93m1.499 12.25c.69 0 1.25-.56 1.25-1.25 0-.69-.56-1.25-1.25-1.25-.69 0-1.25.56-1.25 1.25 0 .69.56 1.25 1.25 1.25"></path></svg></a>`;
+    const li = document.createElement('li');
+    li.innerHTML = element;
+
+    insertAfter(li, document.querySelector('.nav.navbar-nav .visible-sm.visible-xs'));
+};
+
+const mergeRequestPipeline = [
+    addBUCom,
+    handleWIP,
+    handleCanMerge,
+    handleMyMerges
+];
+
+const mergeRequest = () => {
     const elementos = document.querySelectorAll(".merge-request");
-    const pipeline = [
-        addBUCom,
-        handleWIP,
-        handleCanMerge,
-        handleMyMerges
-    ];
-
     for (const elemento of elementos) {
-        pipeline.map(fn => fn(elemento));
+        mergeRequestPipeline.map(fn => fn(elemento));
     }
+};
 
-    /*
-    // Merge com WIP
-    $(".merge-request:contains('WIP:')").css('background-color','#ffead0')
-    .css('border-radius','5px');
+const registerEventClick = (fun) => {
+    const elementos = document.querySelectorAll('a');
+    
+    for (const elemento of elementos) {
+        elemento.addEventListener('click', () => {
+            setTimeout(() => fun(), 500);
+        });
+    }
+};
 
-    // Merge revisados
-    $(".merge-request .controls .fa-thumbs-up").parent().each(function(key, item){
-        if (($(item).text() * 1) >= 2) {
-            $(item).css('color','green').parent().parent().parent().find('.fa-thumbs-up')
-            .css('position','absolute')
-            .css('color','green')
-            .css('left','-24px');
-        }
-    });
-    */
-})();
+const mainPipeline = [
+    main,
+    mergeRequest
+];
+
+const run = () => {
+    mainPipeline.map(pipeline => pipeline());
+    // registerEventClick(run);
+};
+
+run();
+chrome.tabs.onUpdated.addListener( function (tabId, changeInfo, tab) {
+    if (changeInfo.status == 'complete') {
+        run();
+    }
+});
