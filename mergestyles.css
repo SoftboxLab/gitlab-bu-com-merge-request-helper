@@ -11,15 +11,21 @@
 }
 
 .bucom .author_link  {
-    background-color: #5ab4d8 !important;
     font-weight: bold;
     color: #FFFFFF !important;
     padding: 0 7px;
     border-radius: 5px;
 }
 
-.bucom.itsmemario .author_link {
-    background-color: #69d63e !important;
+.bucom.itsmemario .author_link:before {
+    content: "\f007";
+    font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: inherit;
+    color: #333;
+    padding-right: 5px;
+    left: 0;
 }
 
 .bucom .masterMR {
