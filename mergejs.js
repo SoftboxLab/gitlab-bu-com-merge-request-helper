@@ -36,7 +36,7 @@ const handleMyMerges = (elem) => {
     } 
     const colorBg = stringToColour(linkAuthor);
     const colorFont = fontColorByBg(colorBg);
-    const colorRgb = 'rgba('+hexToRgb(colorBg)+',0.6)';
+    const colorRgb = 'rgba('+hexToRgb(colorBg)+',1)';
     elem.querySelector('.author_link').style.cssText = 'background-color: '+colorRgb+'!important; color: '+colorFont+' !important; text-shadow: 0 1px 1px '+colorBg+';';
 };
 
@@ -99,16 +99,6 @@ const mergeRequest = () => {
     }
 };
 
-const registerEventClick = (fun) => {
-    const elementos = document.querySelectorAll('a');
-    
-    for (const elemento of elementos) {
-        elemento.addEventListener('click', () => {
-            setTimeout(() => fun(), 500);
-        });
-    }
-};
-
 const mainPipeline = [
     main,
     mergeRequest
@@ -116,12 +106,13 @@ const mainPipeline = [
 
 const run = () => {
     mainPipeline.map(pipeline => pipeline());
-    // registerEventClick(run);
 };
 
-run();
-chrome.tabs.onUpdated.addListener( function (tabId, changeInfo, tab) {
-    if (changeInfo.status == 'complete') {
+(function mainLoop() {
+    if (!document.body.classList.contains('superextensao')) {
+        document.body.classList.add('superextensao');
         run();
     }
-});
+
+    setTimeout(mainLoop, 1000);
+}());
