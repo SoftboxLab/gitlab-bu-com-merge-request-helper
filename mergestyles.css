@@ -40,9 +40,30 @@
 .bucom.good-to-go {
     background-color: #daf5da;
 }
+.bucom.good-to-go .merge-request-title:before {
+    content: "\f164";
+    font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: inherit;
+    color: green;
+    padding-right: 5px;
+    left: 0;
+}
 
 .bucom.wip {
     background-color: #F1F1F1;
+}
+
+.bucom.wip .merge-request-title:before {
+    content: "\f023";
+    font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: inherit;
+    color: #333;
+    padding-right: 5px;
+    left: 0;
 }
 
 .bucom.merge-denied {
