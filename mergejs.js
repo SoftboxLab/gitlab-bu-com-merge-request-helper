@@ -3,7 +3,7 @@ const isMergeRequestPage = () => window.location.href.trim('/').endsWith('merge_
 const addBUCom = (elem) => elem.classList.add('bucom');
 
 const handleWIP = (elem) => {
-    if (elem.querySelector('.merge-request-title-text a').textContent.startsWith('WIP:')) {
+    if (elem.querySelector('.merge-request-title-text a').textContent.startsWith('WIP')) {
         elem.classList.add('wip');
     }
 };
