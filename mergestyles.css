@@ -1,0 +1,44 @@
+.bucom .merge-request-info {
+    color: #999;
+}
+
+.bucom .merge-request-info a{
+    background-color: #b39ebd;
+    font-weight: bold;
+    color: #FFF !important;
+    padding: 0 7px;
+    border-radius: 5px;
+}
+
+.bucom .author_link  {
+    background-color: #5ab4d8 !important;
+    font-weight: bold;
+    color: #FFFFFF !important;
+    padding: 0 7px;
+    border-radius: 5px;
+}
+
+.bucom.itsmemario .author_link {
+    background-color: #69d63e !important;
+}
+
+.bucom .masterMR {
+	background-color: #ffead0;
+    border-radius: 5px;
+}
+
+.bucom .merge-request-title .fa-exclamation-triangle {
+        color: red;
+}
+
+.bucom.good-to-go {
+    background-color: #daf5da;
+}
+
+.bucom.wip {
+    background-color: #F1F1F1;
+}
+
+.bucom.merge-denied {
+    background-color: #ffe8e8;
+}

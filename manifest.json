@@ -1,0 +1,23 @@
+{
+    "manifest_version": 2,
+
+    "name": "Softbox Gitlab BU .com merge request helper",
+    "description": "Helper para ajudar visualmente na gestão de merge requests na BU.com",
+    "version": "1.0",
+
+    "browser_action": {
+        "default_icon": "icon.png"
+    },
+
+    "content_scripts": [
+        {
+            "matches": ["https://gitlab.softbox.com.br/*"],
+            "css": ["mergestyles.css"],
+            "js": ["mergejs.js"]
+        }
+    ],
+
+    "permissions": [
+        "activeTab"
+    ]
+}
