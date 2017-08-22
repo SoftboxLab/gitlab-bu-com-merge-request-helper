@@ -30,14 +30,14 @@ const handleCanMerge = (elem) => {
 const linkLoggedUser = document.querySelector('.header-user-dropdown-toggle').getAttribute('href');
 
 const handleMyMerges = (elem) => {
-    const linkAuthor = elem.querySelector('.author_link').getAttribute('href');
+    const linkAuthor = elem.querySelector('.merge-request-info .author_link').getAttribute('href');
     if (linkLoggedUser === linkAuthor) {
         elem.classList.add('itsmemario');
     } 
     const colorBg = stringToColour(linkAuthor);
     const colorFont = fontColorByBg(colorBg);
     const colorRgb = 'rgba('+hexToRgb(colorBg)+',0.6)';
-    elem.querySelector('.author_link').style.cssText = 'background-color: '+colorRgb+'!important; color: '+colorFont+' !important; text-shadow: 0 1px 1px '+colorBg+';';
+    elem.querySelector('.merge-request-info .author_link').style.cssText = 'background-color: '+colorRgb+'!important; color: '+colorFont+' !important; text-shadow: 0 1px 1px '+colorBg+';';
 };
 
 const stringToColour = (str) => {
@@ -87,19 +87,4 @@ const hexToRgb = (hex) => {
         pipeline.map(fn => fn(elemento));
     }
 
-    /*
-    // Merge com WIP
-    $(".merge-request:contains('WIP:')").css('background-color','#ffead0')
-    .css('border-radius','5px');
-
-    // Merge revisados
-    $(".merge-request .controls .fa-thumbs-up").parent().each(function(key, item){
-        if (($(item).text() * 1) >= 2) {
-            $(item).css('color','green').parent().parent().parent().find('.fa-thumbs-up')
-            .css('position','absolute')
-            .css('color','green')
-            .css('left','-24px');
-        }
-    });
-    */
 })();
