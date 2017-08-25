@@ -52,7 +52,19 @@
 }
 
 .bucom.wip {
-    background-color: #F1F1F1;
+    background-color: #D9D9D9;
+    opacity: 0.4;
+}
+.bucom.wip a {
+    color: #666 !important;
+}
+
+.bucom.ci-failed {
+    background-color: #ffd4d6 !important;
+}
+
+.bucom.conflict {
+    background-color: #ffd4d6 !important;
 }
 
 .bucom.wip .merge-request-title:before {

@@ -8,6 +8,20 @@ const handleWIP = (elem) => {
     }
 };
 
+const handleCiFailed = (elem) => {
+    const elemCi = elem.querySelector('.merge-request-title .ci-status-icon-failed');
+    if (elemCi !== null) {
+        elemCi.parentElement.parentElement.parentElement.parentElement.classList.add('ci-failed');
+    }
+};
+
+const handleConflict = (elem) => {
+    const elemCi = elem.querySelector('.merge-request-title .fa-exclamation-triangle');
+    if (elemCi !== null) {
+        elemCi.parentElement.parentElement.parentElement.parentElement.parentElement.classList.add('conflict');
+    }
+};
+
 const handleCanMerge = (elem) => {
     const elemThumbsup = elem.querySelector('.controls .fa.fa-thumbs-up');
     const elemThumbsdown = elem.querySelector('.controls .fa.fa-thumbs-down');
@@ -89,7 +103,9 @@ const mergeRequestPipeline = [
     addBUCom,
     handleWIP,
     handleCanMerge,
-    handleMyMerges
+    handleMyMerges,
+    handleCiFailed,
+    handleConflict
 ];
 
 const mergeRequest = () => {
