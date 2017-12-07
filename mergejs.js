@@ -44,14 +44,14 @@ const handleCanMerge = (elem) => {
 const linkLoggedUser = document.querySelector('.header-user-dropdown-toggle').getAttribute('href');
 
 const handleMyMerges = (elem) => {
-    const linkAuthor = elem.querySelector('.merge-request-info .author_link').getAttribute('href');
+    const linkAuthor = elem.querySelector('.issuable-info .author_link').getAttribute('href');
     if (linkLoggedUser === linkAuthor) {
         elem.classList.add('itsmemario');
     } 
     const colorBg = stringToColour(linkAuthor);
     const colorFont = fontColorByBg(colorBg);
     const colorRgb = 'rgba('+hexToRgb(colorBg)+',0.6)';
-    elem.querySelector('.merge-request-info .author_link').style.cssText = 'background-color: '+colorRgb+'!important; color: '+colorFont+' !important; text-shadow: 0 1px 1px '+colorBg+';';
+    elem.querySelector('.issuable-info .author_link').style.cssText = 'background-color: '+colorRgb+'!important; color: '+colorFont+' !important; text-shadow: 0 1px 1px '+colorBg+';';
 };
 
 const stringToColour = (str) => {
@@ -92,11 +92,12 @@ const insertAfter = (newNode, target) => {
 };
 
 const main = () => {
-    const element = `<a href='/groups/mv.com/merge_requests'><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="m5 5.563v4.875c1.024.4 1.75 1.397 1.75 2.563 0 1.519-1.231 2.75-2.75 2.75-1.519 0-2.75-1.231-2.75-2.75 0-1.166.726-2.162 1.75-2.563v-4.875c-1.024-.4-1.75-1.397-1.75-2.563 0-1.519 1.231-2.75 2.75-2.75 1.519 0 2.75 1.231 2.75 2.75 0 1.166-.726 2.162-1.75 2.563m-1 8.687c.69 0 1.25-.56 1.25-1.25 0-.69-.56-1.25-1.25-1.25-.69 0-1.25.56-1.25 1.25 0 .69.56 1.25 1.25 1.25m0-10c.69 0 1.25-.56 1.25-1.25 0-.69-.56-1.25-1.25-1.25-.69 0-1.25.56-1.25 1.25 0 .69.56 1.25 1.25 1.25"></path><path d="m10.501 2c1.381.001 2.499 1.125 2.499 2.506v5.931c1.024.4 1.75 1.397 1.75 2.563 0 1.519-1.231 2.75-2.75 2.75-1.519 0-2.75-1.231-2.75-2.75 0-1.166.726-2.162 1.75-2.563v-5.931c0-.279-.225-.506-.499-.506v.926c0 .346-.244.474-.569.271l-2.952-1.844c-.314-.196-.325-.507 0-.71l2.952-1.844c.314-.196.569-.081.569.271v.93m1.499 12.25c.69 0 1.25-.56 1.25-1.25 0-.69-.56-1.25-1.25-1.25-.69 0-1.25.56-1.25 1.25 0 .69.56 1.25 1.25 1.25"></path></svg></a>`;
+    // const element = `<a href='/groups/mv.com/merge_requests'><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="m5 5.563v4.875c1.024.4 1.75 1.397 1.75 2.563 0 1.519-1.231 2.75-2.75 2.75-1.519 0-2.75-1.231-2.75-2.75 0-1.166.726-2.162 1.75-2.563v-4.875c-1.024-.4-1.75-1.397-1.75-2.563 0-1.519 1.231-2.75 2.75-2.75 1.519 0 2.75 1.231 2.75 2.75 0 1.166-.726 2.162-1.75 2.563m-1 8.687c.69 0 1.25-.56 1.25-1.25 0-.69-.56-1.25-1.25-1.25-.69 0-1.25.56-1.25 1.25 0 .69.56 1.25 1.25 1.25m0-10c.69 0 1.25-.56 1.25-1.25 0-.69-.56-1.25-1.25-1.25-.69 0-1.25.56-1.25 1.25 0 .69.56 1.25 1.25 1.25"></path><path d="m10.501 2c1.381.001 2.499 1.125 2.499 2.506v5.931c1.024.4 1.75 1.397 1.75 2.563 0 1.519-1.231 2.75-2.75 2.75-1.519 0-2.75-1.231-2.75-2.75 0-1.166.726-2.162 1.75-2.563v-5.931c0-.279-.225-.506-.499-.506v.926c0 .346-.244.474-.569.271l-2.952-1.844c-.314-.196-.325-.507 0-.71l2.952-1.844c.314-.196.569-.081.569.271v.93m1.499 12.25c.69 0 1.25-.56 1.25-1.25 0-.69-.56-1.25-1.25-1.25-.69 0-1.25.56-1.25 1.25 0 .69.56 1.25 1.25 1.25"></path></svg></a>`;
+    const element = `<a href='/groups/mv.com/merge_requests'><svg class="s16"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/icons-f1e1e3187fbe3fe3aa42a17cb2558778f1a2ddc2a1914f0ea7ea59d27b4e425c.svg#git-merge"></use></svg></a>`;
     const li = document.createElement('li');
     li.innerHTML = element;
 
-    insertAfter(li, document.querySelector('.nav.navbar-nav .visible-sm.visible-xs'));
+    insertAfter(li, document.querySelector('.nav.navbar-nav .header-user'));
 };
 
 const mergeRequestPipeline = [
@@ -127,6 +128,7 @@ const run = () => {
 (function mainLoop() {
     if (!document.body.classList.contains('superextensao')) {
         document.body.classList.add('superextensao');
+        console.log('INICIADO EXTENSAO')
         run();
     }
 
