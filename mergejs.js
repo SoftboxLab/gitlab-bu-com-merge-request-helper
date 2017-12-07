@@ -3,8 +3,11 @@ const isMergeRequestPage = () => window.location.href.trim('/').endsWith('merge_
 const addBUCom = (elem) => elem.classList.add('bucom');
 
 const handleWIP = (elem) => {
-    if (elem.querySelector('.merge-request-title-text a').textContent.startsWith('WIP')) {
-        elem.classList.add('wip');
+    const elemWip = elem.querySelector('.merge-request-title-text a');
+    if (elemWip) {
+        if (elemWip.textContent.startsWith('WIP')) {
+            elem.classList.add('wip');
+        }
     }
 };
 
@@ -41,17 +44,20 @@ const handleCanMerge = (elem) => {
     }
 };
 
-const linkLoggedUser = document.querySelector('.header-user-dropdown-toggle').getAttribute('href');
-
 const handleMyMerges = (elem) => {
-    const linkAuthor = elem.querySelector('.issuable-info .author_link').getAttribute('href');
-    if (linkLoggedUser === linkAuthor) {
+    const elemUser = document.querySelector('.header-user-dropdown-toggle');
+    const elemLinkAuthor = elem.querySelector('.issuable-info .author_link');
+    if (elemLinkAuthor && elemUser) {
+      const linkLoggedUser = elemUser.getAttribute('href');
+      const linkAuthor = elemLinkAuthor.getAttribute('href');
+      if (linkLoggedUser === linkAuthor) {
         elem.classList.add('itsmemario');
-    } 
-    const colorBg = stringToColour(linkAuthor);
-    const colorFont = fontColorByBg(colorBg);
-    const colorRgb = 'rgba('+hexToRgb(colorBg)+',0.6)';
-    elem.querySelector('.issuable-info .author_link').style.cssText = 'background-color: '+colorRgb+'!important; color: '+colorFont+' !important; text-shadow: 0 1px 1px '+colorBg+';';
+      }
+      const colorBg = stringToColour(linkAuthor);
+      const colorFont = fontColorByBg(colorBg);
+      const colorRgb = 'rgba(' + hexToRgb(colorBg) + ',0.6)';
+      elem.querySelector('.issuable-info .author_link').style.cssText = 'background-color: ' + colorRgb + '!important; color: ' + colorFont + ' !important; text-shadow: 0 1px 1px ' + colorBg + ';';
+    }
 };
 
 const stringToColour = (str) => {
@@ -128,7 +134,6 @@ const run = () => {
 (function mainLoop() {
     if (!document.body.classList.contains('superextensao')) {
         document.body.classList.add('superextensao');
-        console.log('INICIADO EXTENSAO')
         run();
     }
 
