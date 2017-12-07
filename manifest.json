@@ -3,7 +3,7 @@
 
     "name": "Softbox Gitlab BU .com merge request helper",
     "description": "Helper para ajudar visualmente na gestão de merge requests na BU.com",
-    "version": "1.2",
+    "version": "2.0",
 
     "browser_action": {
         "default_icon": "icon.png"
