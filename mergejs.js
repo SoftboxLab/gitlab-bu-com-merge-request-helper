@@ -44,6 +44,22 @@ const handleCanMerge = (elem) => {
     }
 };
 
+const handleProjects = (elem) => {
+  const elemProjectName = elem.querySelector('.issuable-reference');
+
+  if (elemProjectName) {
+    const nameProjectFull = elemProjectName.textContent.split('!');
+    const nameProject = nameProjectFull.shift();
+
+    const colorBg = stringToColour(nameProject);
+    const colorFont = fontColorByBg(colorBg);
+    const colorRgb = 'rgba(' + hexToRgb(colorBg) + ',0.6)';
+
+    elem.querySelector('.issuable-reference').textContent = elemProjectName.textContent.replace('!', ' ! ');
+    elem.querySelector('.issuable-reference').style.cssText = 'background-color: ' + colorRgb + '!important; color: ' + colorFont + ' !important; text-shadow: 0 1px 1px ' + colorBg + ';';
+  }
+};
+
 const handleMyMerges = (elem) => {
     const elemUser = document.querySelector('.header-user-dropdown-toggle');
     const elemLinkAuthor = elem.querySelector('.issuable-info .author_link');
@@ -112,7 +128,8 @@ const mergeRequestPipeline = [
     handleCanMerge,
     handleMyMerges,
     handleCiFailed,
-    handleConflict
+    handleConflict,
+    handleProjects
 ];
 
 const mergeRequest = () => {
